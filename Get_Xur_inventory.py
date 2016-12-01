@@ -37,16 +37,18 @@ print "Error status: " + error_stat + "\n"
 print "##################################################"
 print "## Printing Xur's inventory:"
 print "##################################################"
-
-for saleItem in res.json()['Response']['data']['saleItemCategories']:
-	mysaleItems = saleItem['saleItems']
-	for myItem in mysaleItems:
-		hashID = str(myItem['item']['itemHash'])
-		hashReqString = base_url + "Manifest/" + hashType + "/" + hashID
-		res = requests.get(hashReqString, headers=HEADERS)
-		item_name = res.json()['Response']['data']['inventoryItem']['itemName']
-		print "Item is: " + item_name
-		item_type = res.json()['Response']['data']['inventoryItem']['itemTypeName']
-		item_tier = res.json()['Response']['data']['inventoryItem']['tierTypeName']
-		print "Item type is: " + item_tier + " " + item_type + "\n"
+try:
+    for saleItem in res.json()['Response']['data']['saleItemCategories']:
+        mysaleItems = saleItem['saleItems']
+        for myItem in mysaleItems:
+            hashID = str(myItem['item']['itemHash'])
+            hashReqString = base_url + "Manifest/" + hashType + "/" + hashID
+            res = requests.get(hashReqString, headers=HEADERS)
+            item_name = res.json()['Response']['data']['inventoryItem']['itemName']
+            print "Item is: " + item_name
+            item_type = res.json()['Response']['data']['inventoryItem']['itemTypeName']
+            item_tier = res.json()['Response']['data']['inventoryItem']['tierTypeName']
+            print "Item type is: " + item_tier + " " + item_type + "\n"
+except KeyError:
+    print "Xur only appears from 10am Friday morning to 10am Sunday morning, just wait a lil more :)"
 		
