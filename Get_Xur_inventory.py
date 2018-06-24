@@ -23,20 +23,20 @@ xur_url = "https://www.bungie.net/Platform/Destiny/Advisors/Xur/"
 hashType = "6"
 
 # Send the request and store the result in res:
-print "\n\n\nConnecting to Bungie: " + xur_url + "\n"
-print "Fetching data for: Xur's Inventory!"
+print("\n\n\nConnecting to Bungie: " + xur_url + "\n")
+print("Fetching data for: Xur's Inventory!")
 res = requests.get(xur_url, headers=HEADERS)
 
 # Print the error status:
 error_stat = res.json()['ErrorStatus']
-print "Error status: " + error_stat + "\n"
+print("Error status: " + error_stat + "\n")
 
 # Uncomment this line to print JSON output to a file:
 #f.write(json.dumps(res.json(), indent=4))
 
-print "##################################################"
-print "## Printing Xur's inventory:"
-print "##################################################"
+print("##################################################")
+print("## Printing Xur's inventory:")
+print("##################################################")
 
 for saleItem in res.json()['Response']['data']['saleItemCategories']:
 	mysaleItems = saleItem['saleItems']
@@ -45,8 +45,8 @@ for saleItem in res.json()['Response']['data']['saleItemCategories']:
 		hashReqString = base_url + "Manifest/" + hashType + "/" + hashID
 		res = requests.get(hashReqString, headers=HEADERS)
 		item_name = res.json()['Response']['data']['inventoryItem']['itemName']
-		print "Item is: " + item_name
+		print("Item is: " + item_name)
 		item_type = res.json()['Response']['data']['inventoryItem']['itemTypeName']
 		item_tier = res.json()['Response']['data']['inventoryItem']['tierTypeName']
-		print "Item type is: " + item_tier + " " + item_type + "\n"
+		print("Item type is: " + item_tier + " " + item_type + "\n")
 		
